@@ -1,6 +1,6 @@
 <template>
     <div class="cell" v-on:click="a = true">
-      <template v-if="a">x</template>
+      <template v-if="a">{{text}}</template>
       <template v-else></template>
     </div>
 </template>
@@ -10,7 +10,8 @@ export default {
   name: "cell",
   data() {
     return {
-      a: false
+      a: false,
+      text: 'x'
     }
   }
 };
