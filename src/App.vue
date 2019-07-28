@@ -38,7 +38,7 @@ export default {
   },
   created() {
     this.eventBus.$on('update:has',function(x) {
-      // console.log('你有拿到值吗？')
+      console.log('你有拿到值吗？')
     })
   },
 };
