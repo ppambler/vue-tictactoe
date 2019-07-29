@@ -26,14 +26,8 @@ export default {
     }
   },
   created() {
-    // console.log(this.name)
     let _this = this
     this.eventBus.$on('update:has',function(n) {
-      // console.log('我是Cell')
-      // console.log(this)
-      // console.log(this) //这个this是eventBus 这个Vue实例呀！
-      // console.log(_this)
-      // console.log(`${_this.name}说「${n}」被点击了`)
       _this.temp = n
     })
   },
@@ -58,7 +52,7 @@ export default {
 .cell {
   box-sizing: border-box;
   padding-bottom: 20px;
-  color: red;
+  color: black;
   border: 1px solid black;
   width: 100px;
   height: 100px;

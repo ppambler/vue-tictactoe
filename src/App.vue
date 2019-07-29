@@ -1,22 +1,24 @@
 <template>
-  <div>
-    <div class="row">
-      <Cell name="0" :isOver="isOver" />
-      <Cell name="1" :isOver="isOver" />
-      <Cell name="2" :isOver="isOver" />
+  <div class="wrapper">
+    <div>{{`当前为第${n}手，下一手是${play}下`}}</div>
+    <div class="chessboard">
+      <div class="row">
+        <Cell name="0" :isOver="isOver" />
+        <Cell name="1" :isOver="isOver" />
+        <Cell name="2" :isOver="isOver" />
+      </div>
+      <div class="row">
+        <Cell name="3" :isOver="isOver" />
+        <Cell name="4" :isOver="isOver" />
+        <Cell name="5" :isOver="isOver" />
+      </div>
+      <div class="row">
+        <Cell name="6" :isOver="isOver" />
+        <Cell name="7" :isOver="isOver" />
+        <Cell name="8" :isOver="isOver" />
+      </div>
     </div>
-    <div class="row">
-      <Cell name="3" :isOver="isOver" />
-      <Cell name="4" :isOver="isOver" />
-      <Cell name="5" :isOver="isOver" />
-    </div>
-    <div class="row">
-      <Cell name="6" :isOver="isOver" />
-      <Cell name="7" :isOver="isOver" />
-      <Cell name="8" :isOver="isOver" />
-    </div>
-    {{map}}
-    {{result}}
+    <div>结果：{{result == null ? '胜负未分' : `胜方为${result}`}}</div>
   </div>
 </template>
 
@@ -32,8 +34,10 @@ export default {
     return {
       eventBus: new Vue(),
       map: [[null, null, null], [null, null, null], [null, null, null]],
-      result: false,
-      isOver: false
+      result: null,
+      isOver: false,
+      n: 0,
+      play: '×'
     };
   },
   provide() {
@@ -46,16 +50,10 @@ export default {
     this.eventBus.$on("update:has", function(x, y, z) {
       // y是true,即z为'x'，y：表示点击的是哪个Cell
       const map = _this.map;
+      _this.n++;
+      x ? _this.play = '○' : _this.play = '×'
+      console.log(y)
       let i = parseInt(y);
-      // let temp = map[Math.floor(i/3)]
-      // temp[i%3] = z //这一步不能少
-      // _this.$set(map,temp,z) //可以
-      // 我怀疑这是Vue框架的bug
-      // 假如temp是 map[1],z是×,那么map:[[],'x',[]]
-      // 所以这z得是 [x],temp
-      // _this.$set(map,temp,temp) //这个也可以
-      // _this.$set(temp,temp[i%3],z) //这个也可以
-      // 我怀疑这是Vue的容错性响应式更新
       map[Math.floor(i / 3)][i % 3] = z;
       _this.$set(map, map[2], "balabal"); //乱写的，只要触发一次set就好了
       _this.tell();
@@ -111,5 +109,11 @@ export default {
 <style>
 .row {
   display: flex;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 </style>
