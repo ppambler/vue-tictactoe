@@ -40,7 +40,7 @@ export default {
       }
       this.a = true
       this.temp ? this.text = '○': this.text = 'x'
-      this.eventBus.$emit('update:has', !this.temp)
+      this.eventBus.$emit('update:has', !this.temp,this.name,this.text)
     }
   },
 
