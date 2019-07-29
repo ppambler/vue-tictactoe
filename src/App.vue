@@ -1,19 +1,19 @@
 <template>
   <div>
     <div class="row">
-      <Cell name="0" />
-      <Cell name="1" />
-      <Cell name="2" />
+      <Cell name="0" :isOver="isOver" />
+      <Cell name="1" :isOver="isOver" />
+      <Cell name="2" :isOver="isOver" />
     </div>
     <div class="row">
-      <Cell name="3" />
-      <Cell name="4" />
-      <Cell name="5" />
+      <Cell name="3" :isOver="isOver" />
+      <Cell name="4" :isOver="isOver" />
+      <Cell name="5" :isOver="isOver" />
     </div>
     <div class="row">
-      <Cell name="6" />
-      <Cell name="7" />
-      <Cell name="8" />
+      <Cell name="6" :isOver="isOver" />
+      <Cell name="7" :isOver="isOver" />
+      <Cell name="8" :isOver="isOver" />
     </div>
     {{map}}
     {{result}}
@@ -32,7 +32,8 @@ export default {
     return {
       eventBus: new Vue(),
       map: [[null, null, null], [null, null, null], [null, null, null]],
-      result: false
+      result: false,
+      isOver: false
     };
   },
   provide() {
@@ -70,6 +71,7 @@ export default {
           map[i][0] == map[i][1] &&
           map[i][0] == map[i][2]
         ) {
+          this.isOver = true
           return (this.result = map[i][0]);
         }
       }
@@ -80,6 +82,7 @@ export default {
           map[0][j] == map[1][j] &&
           map[0][j] == map[2][j]
         ) {
+          this.isOver = true
           return (this.result = map[0][j]);
         }
       }
@@ -89,6 +92,7 @@ export default {
         map[0][0] == map[1][1] &&
         map[0][0] == map[2][2]
       ) {
+        this.isOver = true
         return (this.result = map[0][0]);
       }
       if (
@@ -96,6 +100,7 @@ export default {
         map[0][2] == map[1][1] &&
         map[0][2] == map[2][0]
       ) {
+        this.isOver = true
         return (this.result = map[0][2]);
       }
     }

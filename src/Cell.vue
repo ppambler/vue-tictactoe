@@ -12,6 +12,10 @@ export default {
   props: {
     name: {
       type: String
+    },
+    isOver: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -36,6 +40,9 @@ export default {
   methods: {
     xxx() {
       if(this.text !== '') {
+        return
+      }
+      if(this.isOver) {
         return
       }
       this.a = true
